@@ -1,50 +1,38 @@
 document.getElementById('withdraw-btn').addEventListener('click',function(){
-    // get the agent number from user 
-    const getAgentNumber = document.getElementById('agent-number');
-    const agentNumber =getAgentNumber.value;
-    console.log(agentNumber)
-    if(agentNumber.length > 11 || agentNumber.length <11){
-        alert(`This agent number is invalid
-               please entered a valid agent number`);
-               return;
-    }
-
-
-    //    get cashout amount from user 
-    const getCashoutAmount = document.getElementById('cashout-amount');
-    const cashoutAmount = getCashoutAmount.value;
-    console.log(cashoutAmount);
-
-
-    // get pin number from user input 
-    const getCashoutPin = document.getElementById('cashout-pin');
-    const cashoutPin = getCashoutPin.value;
-    console.log(cashoutPin)
-   
-
-    // get main balance from account
-    const getMainBalance = document.getElementById('balance');
-    const mainBalance = getMainBalance.innerText;
-    console.log(mainBalance);
-
-    // validation
-    if (cashoutAmount > mainBalance) {
-        alert(`Insufficient balance`);
+    // get the agent number from input
+    const agentNumber = getValueFromId('agent-number');
+    console.log(agentNumber);
+    if(agentNumber.length !== 11){
+        alert('Please enter a valid agent number');
         return;
     }
-    
-    // calculate the amount after cashout 
-    const newAmount =Number(mainBalance) - cashoutAmount;
 
-    
- if(cashoutPin !== '1234'){
-        alert(`Password incorrect 
-            Please entered a valid password or reset password please`);
+    // get the amount from input 
+    const CashoutAmount = getValueFromId("cashout-amount")
+    console.log(CashoutAmount);
+
+    // get pin from input
+    const pin = getValueFromId('cashout-pin');
+    console.log(pin);
+
+    // get main balance 
+    const currentBalance = getInnerTextFromId("balance");
+    console.log(currentBalance);
+    if(currentBalance<CashoutAmount){
+        alert('Insufficient Balance');
+        return;
+    }
+    // calculate the operation 
+    const newBalance = currentBalance - CashoutAmount;
+    console.log(newBalance);
+    if(pin !== '1234'){
+        alert(`your pin is incorrect 
+            please enter a valid pin`);
+            return;
     }
     else{
-        getMainBalance.innerText = newAmount;
-        alert(`Cashout successful`)
-        console.log(newAmount);
+        alert('Cash Out Successful');
+        document.getElementById('balance').innerText = newBalance;
     }
-    // update the main balance 
+
 })
