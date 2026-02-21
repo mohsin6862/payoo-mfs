@@ -1,29 +1,27 @@
-document.getElementById('withdraw-btn').addEventListener('click',function(){
+document.getElementById('send-now-btn').addEventListener('click',function(){
     // get the agent number from input
-    const agentNumber = getValueFromId('agent-number');
-    console.log(agentNumber);
-    if(agentNumber.length !== 11){
-        alert('Please enter a valid agent number');
+    const transferNumber = getValueFromId('transfer-number');
+    if(transferNumber.length !== 11){
+        alert('Please enter a valid number to transfer money');
         return;
     }
 
     // get the amount from input 
-    const CashoutAmount = getValueFromId("cashout-amount")
-    console.log(CashoutAmount);
+    const transferAmount = getValueFromId("transfer-amount")
+    console.log(transferAmount);
 
     // get pin from input
-    const pin = getValueFromId('cashout-pin');
-    console.log(pin);
+    const pin = getValueFromId('transfer-pin');
+   
 
     // get main balance 
     const currentBalance = getInnerTextFromId("balance");
-    console.log(currentBalance);
-    if(currentBalance<CashoutAmount){
+    if(currentBalance<transferAmount){
         alert('Insufficient Balance');
         return;
     }
     // calculate the operation 
-    const newBalance = currentBalance - CashoutAmount;
+    const newBalance = currentBalance - transferAmount;
     console.log(newBalance);
 
     // add transaction history
@@ -31,7 +29,7 @@ document.getElementById('withdraw-btn').addEventListener('click',function(){
     const newHistory = document.createElement('div');
     newHistory.innerHTML =`
     <div  class="bg-base-200 my-5 p-4">
-        Cashout success ${CashoutAmount} Taka from Agent No:${agentNumber}, at ${new Date()}
+        Transfer money success ${transferAmount} Taka to ${transferNumber} number, at ${new Date()}
          </div>
     `
 
@@ -43,7 +41,7 @@ document.getElementById('withdraw-btn').addEventListener('click',function(){
             return;
     }
     else{
-        alert('Cash Out Successful');
+        alert('Transfer Money Successful');
         document.getElementById('balance').innerText = newBalance;
     }
 

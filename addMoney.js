@@ -29,6 +29,17 @@ document.getElementById('add-money-btn').addEventListener('click',function(){
     // calculate the add money
     const newBalance = Number(currentBalance) + Number(amountToAdd);
 
+    // add transaction history 
+    const history = document.getElementById('history-container');
+    const newHistory = document.createElement('div');
+    newHistory.innerHTML =`
+    <div  class="bg-base-200 my-5 p-4">
+        Add money success ${amountToAdd} Taka from ${bank} A/C No ${bankAcNo}, at ${new Date()}
+         </div>
+    `
+
+    history.appendChild(newHistory);
+
     // get the pin for verify 
     const pin = getValueFromId('add-money-pin');
     if(pin!=='1234'){
